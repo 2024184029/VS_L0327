@@ -1,7 +1,12 @@
-#pragma once
+﻿#pragma once
 #include "Actor.h"
+#include "Character.h"
 
-class APlayer : public AActor
+class USpriteAnimationComponent;
+class UCollisionComponent;
+class AActor;
+
+class APlayer : public ACharacter
 {
 public:
 	APlayer(int InX = 1, int InY = 1, char InMesh = 'P');
@@ -11,5 +16,11 @@ public:
 
 	virtual void Tick() override;
 
-	virtual void Render() override;
+	virtual void ReceiveHit(AActor* Other) override;
+
+	void ProcessBeginOverlap(AActor* OtherActor);
+
+	USpriteAnimationComponent* SpriteAnimationComponent;
+
+	UCollisionComponent* CollisionComponent;
 };

@@ -19,6 +19,23 @@ public:
 		return NewActor;
 	}
 
+
+	template<typename T>
+	AActor* GetActorOfClass() 		// 액터 중 T클래스로 된 액터를 get하기 위함
+	{
+		for (auto Actor : Actors)
+		{
+			T* Target = dynamic_cast<T*>(Actor);
+			if (Target)
+			{
+				return Target;
+			}
+		}
+
+		return nullptr;
+	}
+
+
 	void Load(std::string MapName);
 
 
