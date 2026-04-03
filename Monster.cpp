@@ -18,6 +18,8 @@ AMonster::AMonster(int InX, int InY, char InMesh)
 	SpriteComponent->Texture = TempResource.Texture;
 	SpriteComponent->ZOrder = 30;
 	ExecutionTime = 0.5f; // 0.5초에 한 번씩 이동
+
+	Name = "Monster";
 }
 
 AMonster::~AMonster()

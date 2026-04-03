@@ -15,6 +15,8 @@ AGoal::AGoal(int InX, int InY, char InMesh)
 	SpriteComponent->Image = TempResource.Image;
 	SpriteComponent->Texture = TempResource.Texture;
 	SpriteComponent->ZOrder = 10;
+
+	Name = "Goal";
 }
 
 AGoal::~AGoal()

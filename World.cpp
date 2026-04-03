@@ -28,10 +28,13 @@ UWorld::~UWorld()
 	Actors.clear();
 }
 
+void UWorld::SetGameMode(AGameMode* NewGameMode)
+{
+	Actors.push_back(NewGameMode);
+}
+
 void UWorld::Load(std::string MapName)
 {
-	Actors.push_back(new AGameMode());
-
 	std::ifstream MapStream(MapName);
 
 	int Y = 0;
@@ -137,6 +140,14 @@ void UWorld::Sort()
 	//}
 }
 
+void UWorld::BeginPlay()
+{
+	for (auto Actor : Actors)
+	{
+		Actor->BeginPlay();
+	}
+}
+
 void UWorld::Tick()
 {
 	for (auto Actor : Actors)
@@ -155,7 +166,7 @@ void UWorld::Render()
 		//가진 컴포넌트중에 SpriteRenderComponent가 있냐 물어보는거임?
 		for (auto Component : Actor->Components)
 		{
-			USpriteComponent* RenderComponent = dynamic_cast<USpriteComponent*>(Component);
+			IRenderableComponent* RenderComponent = dynamic_cast<IRenderableComponent*>(Component);
 			if (RenderComponent)
 			{
 				RenderComponent->Render();

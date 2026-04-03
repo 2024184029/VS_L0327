@@ -1,5 +1,11 @@
 #pragma once
 #include "Engine.h"
+#include "World.h"
+
+
+class AActor;
+class AGameMode;
+
 class UGameplayStatics
 {
 public:
@@ -10,5 +16,6 @@ public:
 	{
 		return GEngine->GetDeltaSeconds();
 	}
-};
 
+	static AGameMode* GetGameMode();
+};

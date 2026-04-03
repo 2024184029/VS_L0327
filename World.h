@@ -3,6 +3,8 @@
 #include <string>
 
 class AActor;
+class AGameMode;
+
 
 class UWorld
 {
@@ -10,18 +12,20 @@ public:
 	UWorld();
 	virtual ~UWorld();
 
+	void SetGameMode(AGameMode* NewGameMode);
+
 	template<typename T>
 	AActor* SpawnActor()
 	{
 		AActor* NewActor = new T;
 		Actors.push_back(NewActor);
+		NewActor->SetWorld(this);
 
 		return NewActor;
 	}
 
-
 	template<typename T>
-	AActor* GetActorOfClass() 		// 액터 중 T클래스로 된 액터를 get하기 위함
+	AActor* GetActorOfClass()
 	{
 		for (auto Actor : Actors)
 		{
@@ -45,6 +49,8 @@ public:
 	{
 		return Actors;
 	}
+
+	void BeginPlay();
 
 	void Tick();
 
